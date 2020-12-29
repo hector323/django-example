@@ -48,8 +48,8 @@ def homepage(request):
 def adoption(request):
     print("adoption page getting viewed")
 
-    if 'number' in request.GET:
-        number = int(request.GET['number'])
+    if 'number' in request.POST:
+        number = int(request.POST['number'])
         print('They entered:', number)
         for shiba in shibas:
           if shiba['id_number'] == number:
@@ -66,9 +66,9 @@ def shiba_add(request):
 
     context = {}  # No need for context on this page
 
-    if 'name' in request.GET:
-        age = int(request.GET['age'])
-        name = request.GET['name']
+    if 'name' in request.POST:
+        age = int(request.POST['age'])
+        name = request.POST['name']
         print('They entered:', name)
 
         id_number = len(shibas)
@@ -80,5 +80,6 @@ def shiba_add(request):
             'id_number': id_number,
             'image_src': 'https://i.imgur.com/VEslUBl.png',
         })
+        return redirect('/')
 
     return render(request, 'add_shiba.html', context)
