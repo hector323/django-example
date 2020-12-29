@@ -16,7 +16,7 @@
             <p>Wow, such shiba, much bork!</p>
             <form action="" method="POST">
                 {% csrf_token %}
-                <input name="number" type="number" value="{{ shiba.id_number }}"/>
+                <input style="display:none" name="number" type="number" value="{{ shiba.id_number }}"/>
                 <button>Adopt and remove</button>
             </form>
         </div>
