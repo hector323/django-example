@@ -64,20 +64,21 @@ def adoption(request):
 def shiba_add(request):
     print("add shiba page getting viewed")
 
-    if 'dog_name' in request.GET:
-        the_name = request.GET['dog_name']
-        the_age = request.GET['dog_age']
-        print('name received:', the_name)
-        print('age received:', the_age)
-        count = len(shibas)
-        name_dict = {
-            'image_src': 'https://i.imgur.com/APMdtxs.png',
-            'name': the_name,
-            'age': the_age,
-            'id_number': count + 1,
-    }
-        shibas.append( name_dict )
+    context = {}  # No need for context on this page
 
-    context = {
-    }
+    if 'name' in request.GET:
+        age = int(request.GET['age'])
+        name = request.GET['name']
+        print('They entered:', name)
+
+        id_number = len(shibas)
+
+        # Add a new shiba, make it a taco shiba
+        shibas.append({
+            'age': age,
+            'name': name,
+            'id_number': id_number,
+            'image_src': 'https://i.imgur.com/VEslUBl.png',
+        })
+
     return render(request, 'add_shiba.html', context)
