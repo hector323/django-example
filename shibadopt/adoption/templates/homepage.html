@@ -14,8 +14,14 @@
             <h3>Shiba name: {{ shiba.name }}</h3>
             <h4>Shiba age: {{ shiba.age }}</h4>
             <p>Wow, such shiba, much bork!</p>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input name="number" type="number" value="{{ shiba.id_number }}"/>
+                <button>Adopt and remove</button>
+            </form>
         </div>
     </div>
+
+
 {% endfor %}
 {% endblock %}
-
