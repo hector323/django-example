@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+import random
 
-print("Getting started!!","\n")
 shibas = [
     {
         'image_src': 'https://i.imgur.com/VEslUBl.png',
@@ -35,35 +35,48 @@ shibas = [
 ]
 
 def homepage(request):
-    print("homepage getting viewed")
-    count = len(shibas)
+    # This constructs the "template context dictionary" -- the dictionary that
+    # contains the "template variable" data that we can render into the
+    # template
+    if 'sort_by' in request.GET:
+        dict_key = request.GET['sort_by']
+        # Nice feature of Python lists: We can use this syntax to specify which
+        # property we want to sort by when sorting
+        shibas.sort(key=lambda shiba: shiba[dict_key])
     context = {
-        'shiba_count': count,
+        'shiba_count': len(shibas),
         'all_shibas': shibas,
     }
+
+    # "homepage.html" tells Django to look for the template in
+    # `templates/homepage.html'
     return render(request, 'homepage.html', context)
 
 
-
-def adoption(request):
-    print("adoption page getting viewed")
+def adopt_dog(request):
+    context = {}  # No need for context on this page
 
     if 'number' in request.POST:
         number = int(request.POST['number'])
         print('They entered:', number)
+
         for shiba in shibas:
-          if shiba['id_number'] == number:
-            print('found shiba, removing!')
-            shibas.remove(shiba)
+            if shiba['id_number'] == number:
+                print('found shiba, removing!')
+                shibas.remove(shiba)
 
-    context = {
-    }
-    return render(request, 'adoption_page.html', context)
+        if 'redirect' in request.POST:
+            return redirect('/')
+
+    # "adoption.html" tells Django to look for the template in
+    # `templates/adoption.html'
+    return render(request, 'adoption.html', context)
 
 
-def shiba_add(request):
-    print("add shiba page getting viewed")
 
+
+
+def add_dog(request):
     context = {}  # No need for context on this page
 
     if 'name' in request.POST:
@@ -73,13 +86,15 @@ def shiba_add(request):
 
         id_number = len(shibas)
 
-        # Add a new shiba, make it a taco shiba
+        # Add a new shiba, use the taco shiba image for now
         shibas.append({
             'age': age,
             'name': name,
-            'id_number': id_number,
+            'id_number': random.randint(1000,10000),
             'image_src': 'https://i.imgur.com/VEslUBl.png',
         })
         return redirect('/')
+    # "add_dog.html" tells Django to look for the template in
+    # `templates/add_dog.html'
+    return render(request, 'add_dog.html', context)
 
-    return render(request, 'add_shiba.html', context)
