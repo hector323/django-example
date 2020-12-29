@@ -1,41 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+{% extends "base.html" %}
 
-    <title>Shiba Adoption</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+{% block content %}
+<h2>Adoption statistics:</h2>
+<p>Number of shibas up for adoption: {{ shiba_count }}</p>
 
-<body>
-
-<div class="container">
-    <h1>ShibAdopt</h1>
-    <p>Welcome to our site. This is a site for adopting shibas.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif" />
-    <ol>
-        <li><a href="/add-a-shiba/">Add a Shiba (Under construction!)</a></li>
-        <li><a href="/adopt-a-dog/">Adopt a Shiba (Under construction!)</a></li>
-    </ol>
-
-    <h2>Adoption statistics:</h2>
-    <p>Number of shibas up for adoption: {{ shiba_count }}</p>
-
-    <h2>Shibas up for adoption:</h2>
-    {% for shiba in all_shibas %}
-        <div class="row">
-            <div class="col">
-                <img class="img-fluid" src="{{ shiba.image_src }}" />
-            </div>
-            <div class="col">
-                <h3>Shiba name: {{ shiba.name }}</h3>
-                <h4>Shiba age: {{ shiba.age }}</h4>
-                <p>Wow, such shiba, much bork!</p>
-            </div>
+<h2>Shibas up for adoption:</h2>
+{% for shiba in all_shibas %}
+    <div class="row">
+        <div class="col">
+            <img class="img-fluid" src="{{ shiba.image_src }}" />
         </div>
-    {% endfor %}
-</div>
+        <div class="col">
+            <h3>Shiba name: {{ shiba.name }}</h3>
+            <h4>Shiba age: {{ shiba.age }}</h4>
+            <p>Wow, such shiba, much bork!</p>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
 
-</body>
-</html>

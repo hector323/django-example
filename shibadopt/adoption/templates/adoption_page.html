@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+{% extends "base.html" %}
 
-    <title>Shiba Adoption</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+{% block content %}
+<h2>Adopt a shiba!</h2>
 
-<body>
-
-<div class="container">
-    <h1>Adoption page here</h1>
-    <p>To adopt a Shiba, contact us.</p>
-
-    <form method="GET">
-      <input name="number" />
-      <button>Adopt and remove</button>
-    </form>
-
-</div>
-
-</body>
-</html>
+<form action="." method="GET">
+    <p>Enter the id_number of the Shiba you want to adopt:
+    <input name="number" type="number" />
+    </p>
+    <button>Adopt and remove</button>
+</form>
+{% endblock content %}
