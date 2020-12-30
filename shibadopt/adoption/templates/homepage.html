@@ -5,6 +5,7 @@
 <p>Number of shibas up for adoption: {{ shiba_count }}</p>
 
 <h2>Shibas up for adoption:</h2>
+<a href="/?reverse=true" class="btn btn-primary">Reversed</a>
 {% for shiba in all_shibas %}
     <div class="row">
         <div class="col">
@@ -14,14 +15,13 @@
             <h3>Shiba name: {{ shiba.name }}</h3>
             <h4>Shiba age: {{ shiba.age }}</h4>
             <p>Wow, such shiba, much bork!</p>
-            <form action="" method="POST">
+            <form action="/adopt-a-shiba/" method="POST">
                 {% csrf_token %}
-                <input style="display:none" name="number" type="number" value="{{ shiba.id_number }}"/>
-                <button>Adopt and remove</button>
+                <input name="number" type="hidden" value="{{ shiba.id }}" />
+                <button class="btn btn-success">Adopt and remove</button>
             </form>
+
         </div>
     </div>
-
-
 {% endfor %}
-{% endblock %}
+{% endblock content %}
